@@ -45,15 +45,15 @@ if(${PROJECT_TYPE} STREQUAL "EXE")
 # 指定编译成可执行文件
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES})
 # 链接所使用到的库
-# target_link_libraries()
+# target_link_libraries(${PROJECT_NAME} pthread)
 elseif(${PROJECT_TYPE} STREQUAL "SHARED_LIB")
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 # 链接所使用到的库
-# target_link_libraries()
+# target_link_libraries(${PROJECT_NAME} pthread)
 else()
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
 # 链接所使用到的库
-# target_link_libraries()
+# target_link_libraries(${PROJECT_NAME} pthread)
 endif()
 
 
