@@ -1,12 +1,8 @@
 # CMake最低版本要求
 cmake_minimum_required(VERSION 3.1.0)
 
-# C/C++标准： C11/CXX14
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 14)
-
-# cmake编译类型
-set(CMAKE_BUILD_TYPE Release)
+# 指定编译工具链
+set(CMAKE_TOOLCHAIN_FILE "linux-toolchain.cmake")
 
 # 项目类型: 
 # EXE: 可执行文件
@@ -20,13 +16,8 @@ set(PROJECT_NAME cmk_demo)
 # 项目名称
 project(${PROJECT_NAME})
 
-# 可执行文件输出路径
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/out/bin)
-# 库文件输出路径
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/out/lib)
-
 # 添加子目录(子目录中有CMakeLists.txt文件)
-# add_subdirectory()
+add_subdirectory(base)
 
 # 头文件路径
 include_directories(${PROJECT_SOURCE_DIR})
@@ -37,8 +28,7 @@ include_directories(${PROJECT_SOURCE_DIR}/base)
 
 # 源文件
 file(GLOB_RECURSE SOURCES
-    "base/*.cpp"
-    "base/*.c"
+    calc.cpp
 )
 
 if(${PROJECT_TYPE} STREQUAL "EXE")
@@ -49,7 +39,7 @@ add_executable(${PROJECT_NAME} main.cpp ${SOURCES})
 elseif(${PROJECT_TYPE} STREQUAL "SHARED_LIB")
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 # 链接所使用到的库
-# target_link_libraries(${PROJECT_NAME} pthread)
+target_link_libraries(${PROJECT_NAME} base)
 else()
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
 # 链接所使用到的库
