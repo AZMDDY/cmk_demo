@@ -8,7 +8,7 @@ set(CMAKE_TOOLCHAIN_FILE "linux-toolchain.cmake")
 # EXE: 可执行文件
 # STATIC_LIB: 静态库
 # SHARED_LIB: 动态库
-set(PROJECT_TYPE "SHARED_LIB")
+set(PROJECT_TYPE "EXE")
 
 # 设置项目名称
 set(PROJECT_NAME cmk_demo)
@@ -29,6 +29,7 @@ include_directories(${PROJECT_SOURCE_DIR}/base)
 # 源文件
 file(GLOB_RECURSE SOURCES
     calc.cpp
+    base.cpp
 )
 
 if(${PROJECT_TYPE} STREQUAL "EXE")
