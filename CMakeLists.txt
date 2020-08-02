@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.1.0)
 # 指定编译工具链
 set(CMAKE_TOOLCHAIN_FILE "linux-toolchain.cmake")
 
-# 项目类型: 
+# 项目类型:
 # EXE: 可执行文件
 # STATIC_LIB: 静态库
 # SHARED_LIB: 动态库
@@ -15,6 +15,12 @@ set(PROJECT_NAME cmk_demo)
 
 # 项目名称
 project(${PROJECT_NAME})
+
+# 编译警告选项
+add_compile_options(-Wall)
+add_compile_options(-Wconversion)
+add_compile_options(-Wuninitialized)
+add_compile_options(-Werror)
 
 # 添加子目录(子目录中有CMakeLists.txt文件)
 add_subdirectory(base)
@@ -46,15 +52,3 @@ add_library(${PROJECT_NAME} STATIC ${SOURCES})
 # 链接所使用到的库
 # target_link_libraries(${PROJECT_NAME} pthread)
 endif()
-
-
-
-
-
-
-
-
-
-
-
-
